@@ -1,0 +1,45 @@
+.todo-header{
+  width: 900px;
+  display:flex;
+}
+
+.add-task{
+  display:flex;
+  width: 900px;
+}
+
+.add-task__svg{
+  fill:currentColor;
+  width: 64px;
+  color:red;
+  -webkit-transition: 0.5s ease-out 0.25s;
+  -moz-transition: 0.5s ease-out 0.25s;
+  -o-transition: 0.5s ease-out 0.25s;
+  transition:  0.5s ease-out 0.25s;
+}
+
+ .add-task__svg:hover{
+  color: blue;
+  border-radius: 70%;
+  background-color: hsla(0, 0%, 50%, 0.5);
+  cursor:pointer;
+} 
+
+
+.add-task__text{
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  width: 100%;
+}
+
+.add-task:hover .add-task__svg{
+  color: white;
+  border-radius: 90%;
+  background-color: red;
+}
+
+.add-task:hover {
+  color:red;
+  cursor:pointer;
+}
