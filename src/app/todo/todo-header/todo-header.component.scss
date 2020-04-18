@@ -43,3 +43,54 @@
   color:red;
   cursor:pointer;
 }
+
+
+.todo-adding{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+input[type=text] {
+  width:25%;
+  border: 2px solid red;
+  border-radius: 4px;
+  margin: 8px 0;
+  padding: 12px 20px;
+  -webkit-transition:  width 0.4s ease-in-out;
+  -moz-transition: width 0.4s ease-in-out;
+  -o-transition: width 0.4s ease-in-out;
+  transition:   width 0.4s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus{
+  width: 100%;
+  border-color: hsla(0, 0%, 50%, 0.5);
+}
+
+button{
+font-weight: 700;
+font-size: 13px;
+line-height: 17px;
+padding: 6px 12px 7px;
+border-radius: 3px;
+border: 1px solid transparent;
+width: 15%;
+cursor: pointer;
+margin-right: 5px;
+color: #fff;
+}
+.item-submit{
+background-color: #de4c4a;
+color: #fff;
+}
+
+.item-cancel{
+background-color: #544d4d;
+}
+
+button:disabled{
+  opacity: .5;
+}
