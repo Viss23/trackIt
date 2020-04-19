@@ -1,9 +1,46 @@
 
   <div  *ngIf="adding" class="todo-adding">
     <input type="text" [(ngModel)] ="newData" />
-      <div>
+      <div class="item-editor">
         <button type="submit" class="item-submit" [disabled]="!newData" (click)="addItem()">Добавить</button>
-        <button class="item-cancel" (click)="!adding">Отмена</button>
+        <button class="item-cancel" (click)="!adding; test()">Отмена</button>
+        <div class="items-actions">
+        <button class="item-project item-action" mat-button [matMenuTriggerFor]="menu">
+          <span>
+            <svg viewBox="0 0 24 24" width="32" height="32">
+              <path fill-rule="nonzero" d="M10.5 17h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zM5.75 18.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
+              </path>
+            </svg>
+        </span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <mat-radio-group class="radio-group" name="opList">
+              <button mat-menu-item class="dropdown-item">
+                <mat-radio-button class="radio-button" name="opList">Male</mat-radio-button>
+              </button>
+              <button mat-menu-item class="dropdown-item">
+                <mat-radio-button class="radio-button" name="opList">Female</mat-radio-button>
+              </button>
+            </mat-radio-group> 
+         
+        </mat-menu>
+        <button class="item-action">
+          <span>
+            <svg viewBox="0 0 24 24" width="32" height="32">
+              <path fill-rule="nonzero" d="M3.914 11.086l6.5-6.5A2 2 0 0 1 11.828 4H18a2 2 0 0 1 2 2v6.172a2 2 0 0 1-.586 1.414l-6.5 6.5a2 2 0 0 1-2.828 0l-6.172-6.172a2 2 0 0 1 0-2.828zm.707.707a1 1 0 0 0 0 1.414l6.172 6.172a1 1 0 0 0 1.414 0l6.5-6.5a1 1 0 0 0 .293-.707V6a1 1 0 0 0-1-1h-6.172a1 1 0 0 0-.707.293l-6.5 6.5zM14.75 10.5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
+              </path>
+            </svg>
+        </span>
+        </button>
+        <button class="item-action">
+          <span>
+            <svg viewBox="0 0 24 24" width="32" height="32">
+              <path fill-rule="nonzero" d="M5 13.777V19.5a.5.5 0 1 1-1 0V5a.5.5 0 0 1 .223-.416C5.313 3.857 6.742 3.5 8.5 3.5c1.113 0 1.92.196 3.658.776C13.796 4.82 14.53 5 15.5 5c1.575 0 2.813-.31 3.723-.916A.5.5 0 0 1 20 4.5V13a.5.5 0 0 1-.223.416c-1.09.727-2.519 1.084-4.277 1.084-1.113 0-1.92-.196-3.658-.776C10.204 13.18 9.47 13 8.5 13c-1.45 0-2.614.262-3.5.777zm0-1.123C5.965 12.216 7.133 12 8.5 12c1.113 0 1.92.196 3.658.776 1.638.545 2.371.724 3.342.724 1.45 0 2.614-.262 3.5-.777V5.346c-.965.438-2.133.654-3.5.654-1.113 0-1.92-.196-3.658-.776C10.204 4.68 9.47 4.5 8.5 4.5c-1.45 0-2.614.262-3.5.777v7.377z" >
+              </path>
+            </svg>
+        </span>
+        </button>
+      </div>
       </div>
   </div>
 <div class="todo-header">

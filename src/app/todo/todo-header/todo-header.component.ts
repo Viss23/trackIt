@@ -21,4 +21,7 @@ export class TodoHeaderComponent implements OnInit {
     this.adding= !this.adding;
   }
 
+  test(){
+    console.log(this.todoService.getProjects())
+  }
 }

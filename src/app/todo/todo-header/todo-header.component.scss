@@ -1,3 +1,7 @@
+:host{
+  height: 100px;
+}
+
 .todo-header{
   width: 900px;
   display:flex;
@@ -94,3 +98,53 @@ background-color: #544d4d;
 button:disabled{
   opacity: .5;
 }
+
+.item-actions{
+  --reach-dialog: 1;
+  --reach-tooltip: 1;
+  -webkit-tap-highlight-color: rgba(0,0,0,.4);
+  font-size: 13px;
+  color: #fff;
+  list-style-type: none;
+  display: flex;
+  flex-shrink: 0;
+  height: 24px;
+  margin-left: auto;
+  order: 3;
+}
+.item-action{
+  background-color: #fff;
+  padding: 0;
+  border: none;
+  margin-left: 13px;
+}
+
+.item-editor{
+  display:flex;
+}
+
+.item-project{
+  margin-left: 10px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between ;
+}
+
+.items-actions{
+  margin-left: auto;
+}
+
+.dropdown-item{
+  color:black;
+}
+
+.radio-group{
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  margin: 6px;
+} 
