@@ -1,11 +1,11 @@
 
   <div  *ngIf="adding" class="todo-adding">
-    <input type="text" [(ngModel)] ="newData" />
+    <input type="text" [(ngModel)] ="text" />
       <div class="item-editor">
-        <button type="submit" class="item-submit" [disabled]="!newData" (click)="addItem()">Добавить</button>
-        <button class="item-cancel" (click)="!adding; test()">Отмена</button>
+        <button type="submit" class="item-submit" [disabled]="!text" (click)="addItem(text,project,mark,priority);adding=!adding">Добавить</button>
+        <button class="item-cancel" (click)="adding=!adding">Отмена</button>
         <div class="items-actions">
-        <button class="item-project item-action" mat-button [matMenuTriggerFor]="menu">
+        <button class="item-project item-action" mat-button [matMenuTriggerFor]="aviableProj">
           <span>
             <svg viewBox="0 0 24 24" width="32" height="32">
               <path fill-rule="nonzero" d="M10.5 17h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zM5.75 18.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
@@ -13,18 +13,14 @@
             </svg>
         </span>
         </button>
-        <mat-menu #menu="matMenu">
-            <mat-radio-group class="radio-group" name="opList">
-              <button mat-menu-item class="dropdown-item">
-                <mat-radio-button class="radio-button" name="opList">Male</mat-radio-button>
-              </button>
-              <button mat-menu-item class="dropdown-item">
-                <mat-radio-button class="radio-button" name="opList">Female</mat-radio-button>
+        <mat-menu #aviableProj="matMenu">
+            <mat-radio-group class="radio-group" name="projectList">
+              <button mat-menu-item class="dropdown-item" *ngFor="let proj of projects$ |async">
+                <mat-radio-button class="radio-button" name="projectList">{{proj}}</mat-radio-button>
               </button>
             </mat-radio-group> 
-         
         </mat-menu>
-        <button class="item-action">
+        <button class="item-action" mat-button [matMenuTriggerFor]="aviableMarks">
           <span>
             <svg viewBox="0 0 24 24" width="32" height="32">
               <path fill-rule="nonzero" d="M3.914 11.086l6.5-6.5A2 2 0 0 1 11.828 4H18a2 2 0 0 1 2 2v6.172a2 2 0 0 1-.586 1.414l-6.5 6.5a2 2 0 0 1-2.828 0l-6.172-6.172a2 2 0 0 1 0-2.828zm.707.707a1 1 0 0 0 0 1.414l6.172 6.172a1 1 0 0 0 1.414 0l6.5-6.5a1 1 0 0 0 .293-.707V6a1 1 0 0 0-1-1h-6.172a1 1 0 0 0-.707.293l-6.5 6.5zM14.75 10.5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
@@ -32,6 +28,13 @@
             </svg>
         </span>
         </button>
+        <mat-menu #aviableMarks="matMenu" >
+          <mat-radio-group class="radio-group" name="marksList">
+            <button mat-menu-item class="dropdown-item" *ngFor="let mar of marks$ |async">
+              <mat-radio-button class="radio-button" name="marksList">{{mar}}</mat-radio-button>
+            </button>
+          </mat-radio-group> 
+      </mat-menu>
         <button class="item-action">
           <span>
             <svg viewBox="0 0 24 24" width="32" height="32">
@@ -44,7 +47,7 @@
       </div>
   </div>
 <div class="todo-header">
-  <div (click) ="adding= !adding" >  
+  <div (click) ="adding=!adding; detectChanges() " >  
     <div class="add-task">
       <svg class="add-task__svg" viewBox="0 0 20 20">
         <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>

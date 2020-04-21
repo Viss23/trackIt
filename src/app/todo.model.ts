@@ -2,12 +2,12 @@ export class Todo {
   text:string;
   project:string | null;
   mark:string | null;
-  priority: number;
+  priority: string;
   date: number;
   id:string;
 
 
-  constructor(text:string,project:string|null =null,mark:string|null = null,priority:number = 4) {
+  constructor(text:string,project:string|null =null,mark:string|null = null,priority:string = '4') {
     this.text=text;
     this.project=project;
     this.mark=mark;
