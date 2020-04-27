@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {ModalModule} from './_modal';
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { TodoComponent } from './todo/todo.component';
@@ -15,7 +18,8 @@ import {RandomColorDirective} from './header/random-color.directive';
 import { LeftMenuComponent } from './todo/left-menu/left-menu.component';
 import { MainComponent } from './todo/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { JwtInterceptor,ErrorInterceptor} from './_helpers'
+
 
 @NgModule({
   declarations: [
@@ -36,9 +40,18 @@ import { MaterialModule } from './material.module';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ModalModule,
+    ReactiveFormsModule,
+    HttpClientModule
+    
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

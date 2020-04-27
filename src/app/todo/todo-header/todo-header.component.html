@@ -1,63 +1,114 @@
+<div *ngIf="adding" class="todo-adding">
+  <input type="text" [(ngModel)]="newTaskText" class="todo-input"/>
+  <div class="item-editor">
+    <button type="submit" class="item-submit buttons-action" [disabled]="!newTaskText"
+      (click)="addItem(newTaskText,selectedProject,selectedMark,selectedPriority);adding=!adding">Добавить</button>
+    <button class="item-cancel buttons-action" (click)="adding=!adding">Отмена</button>
+    <div class="items-actions">
 
-  <div  *ngIf="adding" class="todo-adding">
-    <input type="text" [(ngModel)] ="text" />
-      <div class="item-editor">
-        <button type="submit" class="item-submit" [disabled]="!text" (click)="addItem(text,project,mark,priority);adding=!adding">Добавить</button>
-        <button class="item-cancel" (click)="adding=!adding">Отмена</button>
-        <div class="items-actions">
-        <button class="item-project item-action" mat-button [matMenuTriggerFor]="aviableProj">
-          <span>
-            <svg viewBox="0 0 24 24" width="32" height="32">
-              <path fill-rule="nonzero" d="M10.5 17h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zM5.75 18.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
+      <button class="item-project item-action" mat-button [matMenuTriggerFor]="aviableProj">
+        <span>
+          <svg viewBox="0 0 24 24" width="32" height="32">
+            <path fill-rule="nonzero"
+              d="M10.5 17h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zm0-6h9a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1zM5.75 18.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm0-6a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
+            </path>
+          </svg>
+        </span>
+      </button>
+      <mat-menu #aviableProj="matMenu">
+        <mat-radio-group class="radio-group" name="projectList" [(ngModel)]="selectedProject">
+          <button mat-menu-item class="dropdown-item" *ngFor="let proj of projects$ |async">
+            <mat-radio-button class="radio-button" name="projectList" [value]="proj">{{proj}}</mat-radio-button>
+          </button>
+          <div class="add-data">
+            <svg class="add-data__svg" viewBox="0 0 20 20">
+              <path
+                d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10">
               </path>
             </svg>
-        </span>
-        </button>
-        <mat-menu #aviableProj="matMenu">
-            <mat-radio-group class="radio-group" name="projectList">
-              <button mat-menu-item class="dropdown-item" *ngFor="let proj of projects$ |async">
-                <mat-radio-button class="radio-button" name="projectList">{{proj}}</mat-radio-button>
-              </button>
-            </mat-radio-group> 
-        </mat-menu>
-        <button class="item-action" mat-button [matMenuTriggerFor]="aviableMarks">
-          <span>
-            <svg viewBox="0 0 24 24" width="32" height="32">
-              <path fill-rule="nonzero" d="M3.914 11.086l6.5-6.5A2 2 0 0 1 11.828 4H18a2 2 0 0 1 2 2v6.172a2 2 0 0 1-.586 1.414l-6.5 6.5a2 2 0 0 1-2.828 0l-6.172-6.172a2 2 0 0 1 0-2.828zm.707.707a1 1 0 0 0 0 1.414l6.172 6.172a1 1 0 0 0 1.414 0l6.5-6.5a1 1 0 0 0 .293-.707V6a1 1 0 0 0-1-1h-6.172a1 1 0 0 0-.707.293l-6.5 6.5zM14.75 10.5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
-              </path>
-            </svg>
-        </span>
-        </button>
-        <mat-menu #aviableMarks="matMenu" >
-          <mat-radio-group class="radio-group" name="marksList">
-            <button mat-menu-item class="dropdown-item" *ngFor="let mar of marks$ |async">
-              <mat-radio-button class="radio-button" name="marksList">{{mar}}</mat-radio-button>
-            </button>
-          </mat-radio-group> 
+            <div class="add-data__text" (click)="openModal('custom-modal-1')">
+              &nbsp; &nbsp; Добавить проект
+            </div>
+          </div>
+        </mat-radio-group>
       </mat-menu>
-        <button class="item-action">
-          <span>
-            <svg viewBox="0 0 24 24" width="32" height="32">
-              <path fill-rule="nonzero" d="M5 13.777V19.5a.5.5 0 1 1-1 0V5a.5.5 0 0 1 .223-.416C5.313 3.857 6.742 3.5 8.5 3.5c1.113 0 1.92.196 3.658.776C13.796 4.82 14.53 5 15.5 5c1.575 0 2.813-.31 3.723-.916A.5.5 0 0 1 20 4.5V13a.5.5 0 0 1-.223.416c-1.09.727-2.519 1.084-4.277 1.084-1.113 0-1.92-.196-3.658-.776C10.204 13.18 9.47 13 8.5 13c-1.45 0-2.614.262-3.5.777zm0-1.123C5.965 12.216 7.133 12 8.5 12c1.113 0 1.92.196 3.658.776 1.638.545 2.371.724 3.342.724 1.45 0 2.614-.262 3.5-.777V5.346c-.965.438-2.133.654-3.5.654-1.113 0-1.92-.196-3.658-.776C10.204 4.68 9.47 4.5 8.5 4.5c-1.45 0-2.614.262-3.5.777v7.377z" >
-              </path>
-            </svg>
+
+      <button class="item-action" mat-button [matMenuTriggerFor]="aviableMarks">
+        <span>
+          <svg viewBox="0 0 24 24" width="32" height="32">
+            <path fill-rule="nonzero"
+              d="M3.914 11.086l6.5-6.5A2 2 0 0 1 11.828 4H18a2 2 0 0 1 2 2v6.172a2 2 0 0 1-.586 1.414l-6.5 6.5a2 2 0 0 1-2.828 0l-6.172-6.172a2 2 0 0 1 0-2.828zm.707.707a1 1 0 0 0 0 1.414l6.172 6.172a1 1 0 0 0 1.414 0l6.5-6.5a1 1 0 0 0 .293-.707V6a1 1 0 0 0-1-1h-6.172a1 1 0 0 0-.707.293l-6.5 6.5zM14.75 10.5a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z">
+            </path>
+          </svg>
         </span>
-        </button>
-      </div>
-      </div>
+      </button>
+      <mat-menu #aviableMarks="matMenu">
+        <mat-radio-group class="radio-group" name="marksList" [(ngModel)]="selectedMark">
+          <button mat-menu-item class="dropdown-item" *ngFor="let mark of marks$ |async">
+            <mat-radio-button class="radio-button" name="marksList" [value]="mark">{{mark}}</mat-radio-button>
+          </button>
+        </mat-radio-group>
+        <div class="add-data">
+          <svg class="add-data__svg" viewBox="0 0 20 20">
+            <path
+              d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10">
+            </path>
+          </svg>
+          <div class="add-data__text" (click)="openModal('custom-modal-2')">
+            &nbsp; &nbsp; Добавить отметку
+          </div>
+        </div>
+      </mat-menu>
+
+      <button class="item-action"  mat-button [matMenuTriggerFor]="aviablePriorities">
+        <span>
+          <svg viewBox="0 0 24 24" width="32" height="32">
+            <path fill-rule="nonzero"
+              d="M5 13.777V19.5a.5.5 0 1 1-1 0V5a.5.5 0 0 1 .223-.416C5.313 3.857 6.742 3.5 8.5 3.5c1.113 0 1.92.196 3.658.776C13.796 4.82 14.53 5 15.5 5c1.575 0 2.813-.31 3.723-.916A.5.5 0 0 1 20 4.5V13a.5.5 0 0 1-.223.416c-1.09.727-2.519 1.084-4.277 1.084-1.113 0-1.92-.196-3.658-.776C10.204 13.18 9.47 13 8.5 13c-1.45 0-2.614.262-3.5.777zm0-1.123C5.965 12.216 7.133 12 8.5 12c1.113 0 1.92.196 3.658.776 1.638.545 2.371.724 3.342.724 1.45 0 2.614-.262 3.5-.777V5.346c-.965.438-2.133.654-3.5.654-1.113 0-1.92-.196-3.658-.776C10.204 4.68 9.47 4.5 8.5 4.5c-1.45 0-2.614.262-3.5.777v7.377z">
+            </path>
+          </svg>
+        </span>
+      </button>
+      <mat-menu #aviablePriorities="matMenu">
+        <mat-radio-group class="radio-group" name="Priorities" [(ngModel)]="selectedPriority">
+          <button mat-menu-item class="dropdown-item" *ngFor="let priority of priorities$ |async ; let i = index">
+            <mat-radio-button class="radio-button" name="Priorities" [value]="priority" [checked]="i == 1">{{priority}}</mat-radio-button>
+          </button>
+        </mat-radio-group>
+      </mat-menu>
+
+    </div>
   </div>
-<div class="todo-header">
-  <div (click) ="adding=!adding; detectChanges() " >  
-    <div class="add-task">
-      <svg class="add-task__svg" viewBox="0 0 20 20">
-        <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
-      </svg>
-      <div class="add-task__text">
-      &nbsp; &nbsp; Добавить задачу
+</div>
+  <div class="todo-header">
+    <div (click)="adding=!adding; detectChanges() ">
+      <div class="add-task">
+        <svg class="add-task__svg" viewBox="0 0 20 20">
+          <path
+            d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10">
+          </path>
+        </svg>
+        <div class="add-task__text">
+          &nbsp; &nbsp; Добавить задачу
+        </div>
       </div>
     </div>
   </div>
-  
-</div>
 
+  <dialog-modal id="custom-modal-1">
+    <h2>Добавить проект!</h2>
+    <p> <input type="text" class="modal-text" [(ngModel)]="projectInput" /></p>
+    <div class="modal-buttons">
+      <button class="modal-close buttons-action item-cancel" (click)="closeModal('custom-modal-1');cancelProject()">Отмена</button>
+      <button class="modal-add buttons-action   item-submit"(click)="closeModal('custom-modal-1'); addProject(projectInput)">Добавить</button>
+    </div>
+  </dialog-modal>
 
+  <dialog-modal id="custom-modal-2">
+    <h2>Добавить отметку!</h2>
+    <p> <input type="text" class="modal-text" [(ngModel)]="markInput" /></p>
+    <div class="modal-buttons">
+      <button class="modal-close buttons-action item-cancel" (click)="closeModal('custom-modal-2');cancelMark()">Отмена</button>
+      <button class="modal-add buttons-action item-submit "(click)="closeModal('custom-modal-2');addMark(markInput)">Добавить</button>
+    </div>
+  </dialog-modal>

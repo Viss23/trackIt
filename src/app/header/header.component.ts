@@ -1,4 +1,5 @@
 import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
+import { AuthenticationService } from '../_services';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +8,14 @@ import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
 
   }
 
-  
+  logout(){
+    this.authenticationService.logout()
+  }
 
 }

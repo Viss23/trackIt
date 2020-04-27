@@ -17,23 +17,7 @@ export class LeftMenuComponent implements OnInit,OnDestroy {
   
 
 
-  constructor(private todoService:TodoService) {
-    /* this.sub=this.todoService.datas.subscribe((state) => {
-      state.forEach( (value) =>{
-        if  (value.project){
-          this.projects.push(value.project)
-        }
-        if  (value.priority){
-          this.priorities.push(value.priority)
-        }
-        if  (value.mark){
-          this.marks.push(value.mark)
-        }
-      })
-    }) */
-    
-    
-   }
+  constructor(private todoService:TodoService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(  this.todoService.selectUnique('project').subscribe( res =>{
@@ -51,4 +35,17 @@ export class LeftMenuComponent implements OnInit,OnDestroy {
      this.subscriptions.unsubscribe() 
 }
 
+  filterTodo(type:string,id:string){
+    this.todoService.filterTodos(type,id).subscribe( filteredTodo =>{
+      this.todoService.updateDisplayedData(filteredTodo)
+    })
+  }
+
+  showAll(){
+    this.todoService.datas.subscribe( todo =>{
+      this.todoService.updateDisplayedData(todo)
+    })
+  }
+
+ 
 }

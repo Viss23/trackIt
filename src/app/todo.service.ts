@@ -1,46 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './todo.model'
 import { BehaviorSubject, Observable, from } from 'rxjs';
-import {map,tap, distinct} from 'rxjs/operators'
-import { Xmb } from '@angular/compiler';
+import {map,tap, distinct,filter} from 'rxjs/operators'
+import { UserService } from './_services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  /* private data: Array<Todo> = [
-    new Todo('fisrt task')
-  ];
+  constructor(private userService:UserService){}
+  //private data: BehaviorSubject<Array<Todo>> = new BehaviorSubject(Array(new Todo('fisrt task'),new Todo('second')) );
+  //private displayedData:BehaviorSubject<Array<Todo>>=new BehaviorSubject(Array()) ;
 
- 
-
-   //const id = "id" + Math.random().toString(16).slice(2)  
-
-  //random id || probability of collision is not null
-
-  constructor() { }
-
-  addItem(item:string){
-     this.data.push(new Todo(item));
-  }
-
-  getData (){
-    return this.data.slice();
-  }
-
-  getProjects (){
-   return this.data.map( (element) => element.project)
-  } */
-
-  private data: BehaviorSubject<Array<Todo>> = new BehaviorSubject(Array(new Todo('fisrt task'),new Todo('second')) );
-
-  /* addItem(item:string) :Observable{
-    this.data.next(new Todo(item))
-  } */
+  private data: BehaviorSubject<Array<Todo>> = new BehaviorSubject(Array() );
+  private displayedData:BehaviorSubject<Array<Todo>>=new BehaviorSubject(Array()) ;
 
   get datas(){
     return  this.data.asObservable()
+  }
+
+  get displayedDatas(){
+    return this.displayedData.asObservable()
   }
   
 
@@ -48,10 +29,16 @@ export class TodoService {
     return this.data.getValue()
   }
 
+  getDisplayedData () {
+    return this.displayedData.getValue()
+  }
+
   addData (todo: Todo) {
     const oldValue = this.data.getValue();
-    oldValue.push(todo);
-    this.data.next(oldValue)
+     oldValue.push(todo);
+    const newValue = oldValue;
+    this.data.next(newValue)
+    this.userService.updateData(newValue).subscribe(dat =>console.log(dat))
   }
  
   selectUnique(datatype:string):Observable<Array<string>>{
@@ -62,4 +49,21 @@ export class TodoService {
     ) 
      return obs
   }
+
+   filterTodos(datatype:string,id:string):Observable<any>{
+    let obs = this.datas.pipe(
+      map( (data: Todo[]) => data.filter(val =>  typeof(val[`${datatype}`])==="string" )),
+        map( (data:any) =>  data.filter( val => val[`${datatype}`] === id) )
+    )
+    return obs
+   }
+
+   updateDisplayedData(todo:Todo[]){
+     this.displayedData.next(todo)
+   }
+
+   updateData(todo:Todo[]){
+     this.data.next(todo)
+   }
+  //refactor
 }

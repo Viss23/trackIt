@@ -18,7 +18,7 @@ export class ListItemsComponent implements OnInit,OnDestroy {
 
 
   ngOnInit(): void {
-       this.sub=this.todoService.datas.subscribe((state) => this.tasks=state)
+       this.sub=this.todoService.displayedDatas.subscribe((state) => this.tasks=state)
      
   }
 

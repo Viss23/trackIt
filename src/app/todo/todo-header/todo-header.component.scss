@@ -55,7 +55,7 @@
   width: 100%;
 }
 
-input[type=text] {
+.todo-input {
   width:25%;
   border: 2px solid red;
   border-radius: 4px;
@@ -69,22 +69,23 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=text]:focus{
+.todo-input:focus{
   width: 100%;
   border-color: hsla(0, 0%, 50%, 0.5);
 }
 
-button{
-font-weight: 700;
-font-size: 13px;
-line-height: 17px;
-padding: 6px 12px 7px;
-border-radius: 3px;
-border: 1px solid transparent;
-width: 15%;
-cursor: pointer;
-margin-right: 5px;
-color: #fff;
+.buttons-action{
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 6px 12px 7px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  width: 15%;
+  cursor: pointer;
+  margin-right: 5px;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .item-submit{
 background-color: #de4c4a;
@@ -134,6 +135,7 @@ button:disabled{
 
 .items-actions{
   margin-left: auto;
+
 }
 
 .dropdown-item{
@@ -148,3 +150,55 @@ button:disabled{
 .radio-button {
   margin: 6px;
 } 
+
+
+.add-data:hover .add-data__svg{
+  color: white;
+  border-radius: 90%;
+  background-color: red;
+}
+
+.add-data:hover {
+  color:red;
+  cursor:pointer;
+}
+
+.add-data__svg{
+  width:32px;
+  color:red;
+  fill: currentColor;
+}
+
+.add-data{
+  display:flex;
+  margin-top:5px;
+}
+
+.add-data__text{
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  width: 100%;
+}
+
+.modal-text {
+  width:100% !important;
+}
+
+.modal-close{
+  width: auto;
+}
+
+.modal-add {
+  width: auto;
+}
+
+.modal-buttons{
+  display:flex;
+  justify-content: space-between ;
+}
+
+
+ .mat-radio-button{
+  display: flex !important;
+}
